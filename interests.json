@@ -1,0 +1,44 @@
+{
+  "title": {
+    "es": "Mis Intereses",
+    "en": "My Interests"
+  },
+  "interests": [
+    {
+        "icon": "fas fa-water",
+        "title": {
+          "es": "Buceo",
+          "en": "Diving"
+        },
+        "description": {
+          "es": "Amante del océano y el buceo. Certificado PADI con más de 50 inmersiones.",
+          "en": "Ocean lover and scuba diver. PADI certified with over 50 dives."
+        },
+        "image": "images/diving.jpg"
+      },
+    {
+      "icon": "fas fa-book",
+      "title": {
+        "es": "Libros",
+        "en": "Books"
+      },
+      "description": {
+        "es": "Toco la guitarra y disfruto componer mis propias canciones en mi tiempo libre.",
+        "en": "I play guitar and enjoy composing my own songs in my free time."
+      },
+      "image": "images/music.jpg"
+    },
+    {
+      "icon": "fas fa-laptop-code",
+      "title": {
+        "es": "Tecnología",
+        "en": "Technology"
+      },
+      "description": {
+        "es": "Siempre explorando las últimas tendencias en desarrollo web y diseño de interfaces.",
+        "en": "Always exploring the latest trends in web development and interface design."
+      },
+      "image": "images/tech.jpg"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "about": {
+    "title": {
+      "es": "Sobre Mí",
+      "en": "About Me"
+    },
+    "intro": {
+      "name": {
+        "es": "Hola, soy Pablo",
+        "en": "Hi, I'm Pablo"
+      },
+      "description": {
+        "es": "Soy un apasionado buzo autonomo y fotografo, con base en Iquique, Chile. Sin ser mi profesion disfruto de la tecnologia y la IA y me gusta crear Webs App y sitios como este, donde aprovecho tener presentar las capturas que hago bajo y sobre el agua.",
+        "en": "I'm a passionate freelance diver and photographer based in Iquique, Chile. While it's not my profession, I enjoy technology and AI, and I like creating web apps and sites like this one, where I take advantage of the opportunity to showcase my underwater and underwater captures."
+      }
+    },
+    "skills": {
+      "title": {
+        "es": "Habilidades",
+        "en": "Skills"
+      },
+      "items": [
+        "Master Scuba Diver",
+        "Fotografia",
+        "Claude AI",
+        "DeepSeek AI",
+        "Trae IDE",
+        "Windsurf IDE"
+      ]
+    },
+    "experience": {
+      "title": {
+        "es": "Experiencia",
+        "en": "Experience"
+      },
+      "jobs": [
+        {
+          "title": "Master Scuba Diver",
+          "company": "PADI",
+          "period": "2015 - Presente",
+          "description": {
+            "es": "Desarrollo de interfaces de usuario responsivas y accesibles.",
+            "en": "Development of responsive and accessible user interfaces."
+          }
+        },
+        {
+          "title": "UI Designer",
+          "company": "Creative Agency",
+          "period": "2018 - 2020",
+          "description": {
+            "es": "Diseño de interfaces y experiencias de usuario para clientes diversos.",
+            "en": "Designing interfaces and user experiences for diverse clients."
+          }
+        },
+        {
+          "title": "Web Developer",
+          "company": "Freelance",
+          "period": "2016 - 2018",
+          "description": {
+            "es": "Creación de sitios web personalizados para pequeñas empresas.",
+            "en": "Building custom websites for small businesses."
+          }
+        }
+      ]
+    },
+    "cta": {
+      "es": "Conóceme",
+      "en": "Know Me"
+    }
+  },
+  "navigation": {
+    "about": {
+      "es": "Sobre Mí",
+      "en": "About"
+    }
+  }
+}

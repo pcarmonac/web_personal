@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Portfolio</title>
+    <link rel="icon" href="images/favicon.JPG" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -82,8 +83,14 @@
             height: 20px;
             border-radius: 50%;
             left: -10px;
-            top: 0;
+            top: 10px;
             background-color: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 15px;
         }
 
         .timeline::before {
@@ -166,18 +173,16 @@
     <header class="sticky top-0 z-50 bg-black bg-opacity-90 backdrop-blur-sm shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center">
-                    <span class="text-white font-bold text-xl">PC</span>
+                <div class="flex items-center justify-center" style="width: 400px; height: 70px; padding: 1px;">
+                    <img src="images/agua.PNG" alt="Logo Agua" class="w-full h-full object-contain">
                 </div>
-                <span class="text-white font-bold text-xl hidden sm:block">Pablo Carmona Contreras</span>
             </div>
-
             <nav class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-item text-white hover:text-orange-300 py-2" data-en="Home" data-es="Inicio">Inicio</a>
-                <a href="#about" class="nav-item text-white hover:text-orange-300 py-2" data-en="About" data-es="Sobre Mí">Sobre Mí</a>
-                <a href="#gallery" class="nav-item text-white hover:text-orange-300 py-2" data-en="Gallery" data-es="Galería">Galería</a>
-                <a href="#interests" class="nav-item text-white hover:text-orange-300 py-2" data-en="Interests" data-es="Intereses">Intereses</a>
-                <a href="#contact" class="nav-item text-white hover:text-orange-300 py-2" data-en="Contact" data-es="Contacto">Contacto</a>
+                <a href="#home" class="nav-item text-white hover:text-orange-300 py-2 text-2xl" data-en="Home" data-es="Inicio">Inicio</a>
+                <a href="#about" class="nav-item text-white hover:text-orange-300 py-2 text-2xl" data-en="About" data-es="Sobre Mí">Sobre Mí</a>
+                <a href="#gallery" class="nav-item text-white hover:text-orange-300 py-2 text-2xl" data-en="Gallery" data-es="Galería">Galería</a>
+                <a href="#interests" class="nav-item text-white hover:text-orange-300 py-2 text-2xl" data-en="Interests" data-es="Intereses">Intereses</a>
+                <a href="#contact" class="nav-item text-white hover:text-orange-300 py-2 text-2xl" data-en="Contact" data-es="Contacto">Contacto</a>
             </nav>
 
             <div class="flex items-center space-x-4">
@@ -223,7 +228,7 @@
     <section id="about" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                <span data-es="Sobre Mí" data-en="About Me">Sobre Mí</span>
+                <span data-es="" data-en="" id="about-title"></span>
             </h2>
             
             <div class="flex flex-col lg:flex-row gap-12 items-center">
@@ -235,51 +240,20 @@
                 </div>
                 
                 <div class="lg:w-2/3">
-                    <h3 class="text-2xl font-semibold mb-4" data-es="Hola, soy Pablo" data-en="Hi, I'm Pablo">Hola, soy Pablo</h3>
-                    <p class="mb-6" data-es="Soy un apasionado desarrollador y diseñador de Iquique, Chile. Me especializo en crear experiencias digitales hermosas y funcionales que deleitan a los usuarios." 
-                       data-en="I'm a passionate developer and designer from Iquique, Chile. I specialize in creating beautiful and functional digital experiences that delight users.">
-                        Soy un apasionado desarrollador y diseñador de Iquique, Chile. Me especializo en crear experiencias digitales hermosas y funcionales que deleitan a los usuarios.
-                    </p>
+                    <h3 class="text-2xl font-semibold mb-4" data-es="" data-en="" id="about-name"></h3>
+                    <p class="mb-6" data-es="" data-en="" id="about-description"></p>
                     
                     <div class="mb-8">
-                        <h4 class="text-xl font-semibold mb-3" data-es="Habilidades" data-en="Skills">Habilidades</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full">HTML/CSS</span>
-                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full">JavaScript</span>
-                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full">React</span>
-                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full">Node.js</span>
-                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full">UI/UX Design</span>
-                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full">Photography</span>
+                        <h4 class="text-xl font-semibold mb-3" data-es="" data-en="" id="skills-title"></h4>
+                        <div class="flex flex-wrap gap-2" id="skills-container">
+                            <!-- Skills will be loaded from JSON -->
                         </div>
                     </div>
                     
                     <div>
-                        <h4 class="text-xl font-semibold mb-3" data-es="Experiencia" data-en="Experience">Experiencia</h4>
-                        <div class="relative pl-8 timeline">
-                            <div class="mb-8 relative timeline-item">
-                                <h5 class="font-semibold">Frontend Developer</h5>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Tech Solutions Inc. | 2020 - Presente</p>
-                                <p data-es="Desarrollo de interfaces de usuario responsivas y accesibles." 
-                                   data-en="Development of responsive and accessible user interfaces.">
-                                    Desarrollo de interfaces de usuario responsivas y accesibles.
-                                </p>
-                            </div>
-                            <div class="mb-8 relative timeline-item">
-                                <h5 class="font-semibold">UI Designer</h5>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Creative Agency | 2018 - 2020</p>
-                                <p data-es="Diseño de interfaces y experiencias de usuario para clientes diversos." 
-                                   data-en="Designing interfaces and user experiences for diverse clients.">
-                                    Diseño de interfaces y experiencias de usuario para clientes diversos.
-                                </p>
-                            </div>
-                            <div class="relative timeline-item">
-                                <h5 class="font-semibold">Web Developer</h5>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Freelance | 2016 - 2018</p>
-                                <p data-es="Creación de sitios web personalizados para pequeñas empresas." 
-                                   data-en="Building custom websites for small businesses.">
-                                    Creación de sitios web personalizados para pequeñas empresas.
-                                </p>
-                            </div>
+                        <h4 class="text-xl font-semibold mb-3" data-es="" data-en="" id="experience-title"></h4>
+                        <div class="relative pl-8 timeline" id="experience-container">
+                            <!-- Experience items will be loaded from JSON -->
                         </div>
                     </div>
                 </div>
@@ -301,7 +275,7 @@
                     <span data-es="Todo" data-en="All">Todo</span>
                 </button>
                 <button class="filter-btn px-4 py-2 rounded-full" data-category="photography">
-                    <span data-es="Fotografía" data-en="Photography">Fotografía</span>
+                    <span data-es="Fotografia" data-en="Photography">Fotografía</span>
                 </button>
                 <button class="filter-btn px-4 py-2 rounded-full" data-category="travel">
                     <span data-es="Viajes" data-en="Travel">Viajes</span>
@@ -320,50 +294,68 @@
     <!-- Interests Section -->
     <section id="interests" class="py-20">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-es="Mis Intereses" data-en="My Interests">Mis Intereses</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" id="interests-title"></h2>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-                    <div class="h-48 bg-orange-500 flex items-center justify-center">
-                        <i class="fas fa-music text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2" data-es="Música" data-en="Music">Música</h3>
-                        <p data-es="Toco la guitarra y disfruto componer mis propias canciones en mi tiempo libre." 
-                           data-en="I play guitar and enjoy composing my own songs in my free time.">
-                            Toco la guitarra y disfruto componer mis propias canciones en mi tiempo libre.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-                    <div class="h-48 bg-orange-500 flex items-center justify-center">
-                        <i class="fas fa-water text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2" data-es="Buceo" data-en="Diving">Buceo</h3>
-                        <p data-es="Amante del océano y el buceo. Certificado PADI con más de 50 inmersiones." 
-                           data-en="Ocean lover and scuba diver. PADI certified with over 50 dives.">
-                            Amante del océano y el buceo. Certificado PADI con más de 50 inmersiones.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-                    <div class="h-48 bg-orange-500 flex items-center justify-center">
-                        <i class="fas fa-laptop-code text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2" data-es="Tecnología" data-en="Technology">Tecnología</h3>
-                        <p data-es="Siempre explorando las últimas tendencias en desarrollo web y diseño de interfaces." 
-                           data-en="Always exploring the latest trends in web development and interface design.">
-                            Siempre explorando las últimas tendencias en desarrollo web y diseño de interfaces.
-                        </p>
-                    </div>
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="interests-container">
+                <!-- Los intereses se cargarán dinámicamente desde interests.json -->
             </div>
         </div>
     </section>
+
+    <script>
+        // Cargar los intereses desde el archivo JSON
+        fetch('interests.json')
+            .then(response => response.json())
+            .then(data => {
+                // Actualizar el título de la sección
+                document.getElementById('interests-title').textContent = data.title.es;
+                document.getElementById('interests-title').setAttribute('data-es', data.title.es);
+                document.getElementById('interests-title').setAttribute('data-en', data.title.en);
+                
+                // Contenedor de intereses
+                const interestsContainer = document.getElementById('interests-container');
+                
+                // Crear elementos para cada interés
+                data.interests.forEach(interest => {
+                    const interestElement = document.createElement('div');
+                    interestElement.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer interest-item';
+                    
+                    interestElement.innerHTML = `
+                        <div class="h-48 bg-orange-500 flex items-center justify-center">
+                            <i class="${interest.icon} text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2" data-es="${interest.title.es}" data-en="${interest.title.en}">${interest.title.es}</h3>
+                            <p data-es="${interest.description.es}" data-en="${interest.description.en}">
+                                ${interest.description.es}
+                            </p>
+                        </div>
+                    `;
+                    
+                    // Añadir evento de clic para abrir el modal con la imagen correspondiente
+                    interestElement.addEventListener('click', () => {
+                        openImageModal(interest.image, interest.title.es);
+                    });
+                    
+                    interestsContainer.appendChild(interestElement);
+                });
+                
+                // Añadir estilos para el efecto hover similar a la galería
+                const style = document.createElement('style');
+                style.textContent = `
+                    .interest-item {
+                        transition: transform 0.3s;
+                    }
+                    
+                    .interest-item:hover {
+                        transform: scale(1.05);
+                        z-index: 10;
+                    }
+                `;
+                document.head.appendChild(style);
+            })
+            .catch(error => console.error('Error cargando intereses:', error));
+    </script>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-100 dark:bg-gray-900">
@@ -397,7 +389,9 @@
                                 <i class="fas fa-phone-alt mt-1 mr-3"></i>
                                 <div>
                                     <p class="font-semibold" data-es="Teléfono" data-en="Phone">Teléfono</p>
-                                    <p>+56 9 1234 5678</p>
+                                    <a href="https://t.me/pcarmonac" class="w-10 h-10 rounded-full bg-white text-orange-500 flex items-center justify-center hover:bg-gray-100 transition duration-300">
+                                        <i class="fab fa-telegram"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -408,14 +402,11 @@
                                 <a href="https://www.instagram.com/pcarmonac/" class="w-10 h-10 rounded-full bg-white text-orange-500 flex items-center justify-center hover:bg-gray-100 transition duration-300">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="https://x.com/pcarmonac" class="w-10 h-10 rounded-full bg-white text-orange-500 flex items-center justify-center hover:bg-gray-100 transition duration-300">
-                                    <i class="fab fa-twitter"></i>
+                                <a href="https://www.facebook.com/pablo.carmona.165033/" class="w-10 h-10 rounded-full bg-white text-orange-500 flex items-center justify-center hover:bg-gray-100 transition duration-300">
+                                    <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="https://www.youtube.com/@pcarmonac" class="w-10 h-10 rounded-full bg-white text-orange-500 flex items-center justify-center hover:bg-gray-100 transition duration-300">
                                     <i class="fab fa-youtube"></i>
-                                </a>
-                                <a href="https://github.com/pcarmonac" class="w-10 h-10 rounded-full bg-white text-orange-500 flex items-center justify-center hover:bg-gray-100 transition duration-300">
-                                    <i class="fab fa-github"></i>
                                 </a>
                             </div>
                         </div>
@@ -452,19 +443,16 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
                     <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
-                            <span class="text-white font-bold text-sm">PC</span>
+                        <div class="flex items-center justify-center" style="width: px; height: 60px; padding: 2px;">
+                            <img src="images/agua.PNG" alt="Logo Agua" class="w-full h-full object-contain">
                         </div>
-                        <span class="font-bold">Pablo Carmona</span>
                     </div>
                 </div>
                 
                 <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="https://www.instagram.com/pcarmonac/" class="hover:text-orange-300 transition duration-300"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/pablo.carmona.165033/" class="hover:text-orange-300 transition duration-300"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/pcarmonac" class="hover:text-orange-300 transition duration-300"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.youtube.com/@pcarmonac" class="hover:text-orange-300 transition duration-300"><i class="fab fa-youtube"></i></a>
                     <a href="https://www.linkedin.com/in/pacarmona/" class="hover:text-orange-300 transition duration-300"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/pcarmonac" class="hover:text-orange-300 transition duration-300"><i class="fab fa-github"></i></a>
                 </div>
                 
                 <div class="text-center md:text-right">
@@ -478,73 +466,132 @@
         </div>
     </footer>
 
+    <!-- Modal para mostrar imágenes en pantalla completa -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden opacity-0 flex items-center justify-center bg-black bg-opacity-80 transition-opacity duration-300">
+        <div class="relative max-w-4xl max-h-screen p-4">
+            <img id="modalImage" src="" alt="" class="max-w-full max-h-[90vh] object-contain select-none pointer-events-none transform scale-95 transition-transform duration-300" style="-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none;" oncontextmenu="return false;" draggable="false">
+        </div>
+    </div>
+    
+    <style>
+        /* Estilos adicionales para el modal de imágenes */
+        #imageModal.opacity-100 #modalImage {
+            transform: scale(1);
+        }
+        
+        /* Prevenir selección de texto en todo el modal */
+        #imageModal * {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+
     <script>
-        // Gallery Data
-        const galleryItems = [
-            {
-                id: 1,
-                title: "Sunset at the Beach",
-                category: "photography",
-                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80",
-                description: {
-                    es: "Hermosa puesta de sol capturada en la playa Cavancha.",
-                    en: "Beautiful sunset captured at Cavancha beach."
-                }
-            },
-            {
-                id: 2,
-                title: "Mountain Hike",
-                category: "travel",
-                image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                description: {
-                    es: "Excursión a las montañas de los Andes.",
-                    en: "Hiking in the Andes mountains."
-                }
-            },
-            {
-                id: 3,
-                title: "E-commerce Website",
-                category: "projects",
-                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                description: {
-                    es: "Plataforma de comercio electrónico desarrollada para un cliente.",
-                    en: "E-commerce platform developed for a client."
-                }
-            },
-            {
-                id: 4,
-                title: "Street Photography",
-                category: "photography",
-                image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
-                description: {
-                    es: "Vida urbana capturada en el centro de Iquique.",
-                    en: "Urban life captured in downtown Iquique."
-                }
-            },
-            {
-                id: 5,
-                title: "Desert Adventure",
-                category: "travel",
-                image: "https://images.unsplash.com/photo-1682686580391-615b4f716f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                description: {
-                    es: "Explorando el desierto de Atacama.",
-                    en: "Exploring the Atacama desert."
-                }
-            },
-            {
-                id: 6,
-                title: "Portfolio Design",
-                category: "projects",
-                image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-                description: {
-                    es: "Diseño de portafolio personal para un artista.",
-                    en: "Personal portfolio design for an artist."
-                }
+        // Load content from JSON
+        async function loadContent() {
+            try {
+                const response = await fetch('content.json');
+                const content = await response.json();
+                
+                // Load About section content
+                document.getElementById('about-title').textContent = content.about.title.es;
+                document.getElementById('about-title').setAttribute('data-es', content.about.title.es);
+                document.getElementById('about-title').setAttribute('data-en', content.about.title.en);
+                
+                document.getElementById('about-name').textContent = content.about.intro.name.es;
+                document.getElementById('about-name').setAttribute('data-es', content.about.intro.name.es);
+                document.getElementById('about-name').setAttribute('data-en', content.about.intro.name.en);
+                
+                document.getElementById('about-description').textContent = content.about.intro.description.es;
+                document.getElementById('about-description').setAttribute('data-es', content.about.intro.description.es);
+                document.getElementById('about-description').setAttribute('data-en', content.about.intro.description.en);
+                
+                document.getElementById('skills-title').textContent = content.about.skills.title.es;
+                document.getElementById('skills-title').setAttribute('data-es', content.about.skills.title.es);
+                document.getElementById('skills-title').setAttribute('data-en', content.about.skills.title.en);
+                
+                // Load skills
+                const skillsContainer = document.getElementById('skills-container');
+                content.about.skills.items.forEach(skill => {
+                    const skillSpan = document.createElement('span');
+                    skillSpan.className = 'px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full';
+                    skillSpan.textContent = skill;
+                    skillsContainer.appendChild(skillSpan);
+                });
+                
+                document.getElementById('experience-title').textContent = content.about.experience.title.es;
+                document.getElementById('experience-title').setAttribute('data-es', content.about.experience.title.es);
+                document.getElementById('experience-title').setAttribute('data-en', content.about.experience.title.en);
+                
+                // Load experience items
+                const experienceContainer = document.getElementById('experience-container');
+                content.about.experience.jobs.forEach((job, index) => {
+                    const isLast = index === content.about.experience.jobs.length - 1;
+                    const jobDiv = document.createElement('div');
+                    jobDiv.className = isLast ? 'relative timeline-item' : 'mb-8 relative timeline-item';
+                    
+                    const title = document.createElement('h5');
+                    title.className = 'font-semibold';
+                    title.textContent = job.title;
+                    
+                    const period = document.createElement('p');
+                    period.className = 'text-sm text-gray-500 dark:text-gray-400';
+                    period.textContent = `${job.company} | ${job.period}`;
+                    
+                    const description = document.createElement('p');
+                    description.textContent = job.description.es;
+                    description.setAttribute('data-es', job.description.es);
+                    description.setAttribute('data-en', job.description.en);
+                    
+                    jobDiv.appendChild(title);
+                    jobDiv.appendChild(period);
+                    jobDiv.appendChild(description);
+                    experienceContainer.appendChild(jobDiv);
+                });
+                
+                // Load CTA button text
+                document.getElementById('about-cta').textContent = content.about.cta.es;
+                document.getElementById('about-cta').setAttribute('data-es', content.about.cta.es);
+                document.getElementById('about-cta').setAttribute('data-en', content.about.cta.en);
+                
+                // Load navigation text
+                document.getElementById('nav-about').textContent = content.navigation.about.es;
+                document.getElementById('nav-about').setAttribute('data-es', content.navigation.about.es);
+                document.getElementById('nav-about').setAttribute('data-en', content.navigation.about.en);
+                
+                document.getElementById('mobile-nav-about').textContent = content.navigation.about.es;
+                document.getElementById('mobile-nav-about').setAttribute('data-es', content.navigation.about.es);
+                document.getElementById('mobile-nav-about').setAttribute('data-en', content.navigation.about.en);
+                
+            } catch (error) {
+                console.error('Error loading content:', error);
             }
-        ];
+        }
+        
+        // Gallery Data will be loaded from gallery.json
+        let galleryItems = [];
+        
+        // Load gallery data
+        async function loadGalleryData() {
+            try {
+                const response = await fetch('gallery.json');
+                const data = await response.json();
+                galleryItems = data.items;
+            } catch (error) {
+                console.error('Error loading gallery data:', error);
+            }
+        }
 
         // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load content from JSON
+            loadContent();
+            
+            // Load gallery data
+            await loadGalleryData();
+            
             // Initialize dark mode from localStorage
             const darkMode = localStorage.getItem('darkMode') === 'true';
             if (darkMode) {
@@ -683,6 +730,12 @@
             // Clear existing items
             galleryContainer.innerHTML = '';
             
+            // Check if gallery items are loaded
+            if (galleryItems.length === 0) {
+                console.error('Gallery items not loaded yet');
+                return;
+            }
+            
             // Filter items by category
             const filteredItems = category === 'all' 
                 ? galleryItems 
@@ -691,7 +744,7 @@
             // Render filtered items
             filteredItems.forEach(item => {
                 const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg';
+                galleryItem.className = 'gallery-item bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer';
                 
                 galleryItem.innerHTML = `
                     <div class="h-48 overflow-hidden">
@@ -703,8 +756,61 @@
                     </div>
                 `;
                 
+                // Añadir evento de clic para abrir el modal
+                galleryItem.addEventListener('click', () => {
+                    openImageModal(item.image, item.title);
+                });
+                
                 galleryContainer.appendChild(galleryItem);
             });
+        }
+        
+        // Funciones para el modal de imágenes
+        function openImageModal(imageSrc, imageAlt) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            // Establecer la imagen en el modal
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+            
+            // Mostrar el modal con animación
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+            
+            // Añadir eventos para cerrar el modal
+            modal.addEventListener('click', closeImageModal);
+            document.addEventListener('keydown', closeImageModalOnKey);
+        }
+        
+        function closeImageModal(event) {
+            // Solo cerrar si se hace clic fuera de la imagen
+            if (event.target.id === 'imageModal') {
+                const modal = document.getElementById('imageModal');
+                modal.classList.remove('opacity-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+                
+                // Eliminar eventos
+                modal.removeEventListener('click', closeImageModal);
+                document.removeEventListener('keydown', closeImageModalOnKey);
+            }
+        }
+        
+        function closeImageModalOnKey(event) {
+            // Cerrar con cualquier tecla
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+            
+            // Eliminar eventos
+            modal.removeEventListener('click', closeImageModal);
+            document.removeEventListener('keydown', closeImageModalOnKey);
         }
     </script>
 </html>

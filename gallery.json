@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "Sunset at the Beach",
+      "category": "photography",
+      "image": "Fotos/D02.JPG",
+      "description": {
+        "es": "Hermosa puesta de sol capturada en la playa Cavancha.",
+        "en": "Beautiful sunset captured at Cavancha beach."
+      }
+    },
+    {
+      "id": 2,
+      "title": "Mountain Hike",
+      "category": "travel",
+      "image": "Fotos/D03.JPG",
+      "description": {
+        "es": "Excursión a las montañas de los Andes.",
+        "en": "Hiking in the Andes mountains."
+      }
+    },
+    {
+      "id": 3,
+      "title": "E-commerce Website",
+      "category": "projects",
+      "image": "Fotos/D04.JPG",
+      "description": {
+        "es": "Plataforma de comercio electrónico desarrollada para un cliente.",
+        "en": "E-commerce platform developed for a client."
+      }
+    },
+    {
+      "id": 4,
+      "title": "Street Photography",
+      "category": "photography",
+      "image": "Fotos/D05.JPG",
+      "description": {
+        "es": "Vida urbana capturada en el centro de Iquique.",
+        "en": "Urban life captured in downtown Iquique."
+      }
+    }
+  ]
+}
