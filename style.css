@@ -1,28 +1,180 @@
+:root {
+    --primary: #FF8C00;
+    --text: #f0fdf4;
+    --bg: #020617;
+}
+
+body:not(.dark) {
+    --primary: #FF8C00;
+    --text: #1f2937;
+    --bg: #ffffff;
+}
+
 body {
-	padding: 2rem;
-	font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-h1 {
-	font-size: 16px;
-	margin-top: 0;
+.logo-bg {
+    background-image: url('images/fondo.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
 }
 
-p {
-	color: rgb(107, 114, 128);
-	font-size: 15px;
-	margin-bottom: 10px;
-	margin-top: 5px;
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.card {
-	max-width: 620px;
-	margin: 0 auto;
-	padding: 16px;
-	border: 1px solid lightgray;
-	border-radius: 16px;
+.nav-item {
+    position: relative;
 }
 
-.card p:last-child {
-	margin-bottom: 0;
+.nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+.gallery-item {
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.interest-item {
+    transition: transform 0.3s;
+}
+
+.interest-item:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: var(--primary);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    left: -10px;
+    top: 10px;
+    background-color: var(--primary);
+}
+
+.language-option {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.language-option.active {
+    opacity: 1;
+    font-weight: bold;
+}
+
+.fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.mode-toggle {
+    transition: transform 0.3s;
+}
+
+.mode-toggle:hover {
+    transform: rotate(30deg);
+}
+
+.copy-btn {
+    transition: all 0.3s;
+}
+
+.copy-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.copy-btn.copied {
+    background-color: #10b981;
+    color: white;
+}
+
+.filter-btn {
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+#imageModal.opacity-100 #modalImage {
+    transform: scale(1);
+}
+
+#imageModal * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.form-feedback {
+    transition: opacity 0.3s;
+}
+
+@media (max-width: 768px) {
+    .logo-bg {
+        background-size: 100px;
+    }
+
+    .parallax {
+        background-attachment: scroll;
+    }
 }

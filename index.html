@@ -6,166 +6,13 @@
     <title>Personal Portfolio</title>
     <link rel="icon" href="images/favicon.JPG" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Custom CSS for features Tailwind can't handle */
-        :root {
-            --primary-dark: #FF8C00;   /* Naranjo oscuro */
-            --text-dark: #f0fdf4;
-            --bg-dark: #020617;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-dark);
-        }
-
-        .dark-mode {
-            background-color: var(--bg-dark);
-            color: var(--text-dark);
-            --primary: var(--primary-dark);
-        }
-
-        .logo-bg {
-            background-image: url('images/fondo.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            background-size: cover;
-            opacity: 0.8;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-        }
-
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-item::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-item:hover::after {
-            width: 100%;
-        }
-
-        .gallery-item {
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            left: -10px;
-            top: 10px;
-            background-color: var(--primary);
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-left: 15px;
-            margin-bottom: 15px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 100%;
-            left: 0;
-            top: 0;
-            background-color: var(--primary);
-        }
-
-        .language-option {
-            cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-
-        .language-option.active {
-            opacity: 1;
-            font-weight: bold;
-        }
-
-        .fade-in {
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .mode-toggle {
-            transition: transform 0.3s;
-        }
-
-        .mode-toggle:hover {
-            transform: rotate(30deg);
-        }
-
-        .copy-btn {
-            transition: all 0.3s;
-        }
-
-        .copy-btn:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .copy-btn.copied {
-            background-color: #10b981;
-            color: white;
-        }
-
-        .filter-btn {
-            transition: all 0.3s;
-        }
-
-        .filter-btn.active {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            .logo-bg {
-                background-size: 100px;
-            }
-            
-            .parallax {
-                background-attachment: scroll;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-mode">
+<body class="dark">
     <!-- Background Logo -->
     <div class="logo-bg"></div>
 
@@ -190,7 +37,12 @@
                     <span class="language-option active" data-lang="es">🇨🇱</span>
                     <span class="language-option" data-lang="en">🇺🇸</span>
                 </div>
-                
+
+                <button class="mode-toggle text-white text-xl hover:text-orange-300 transition duration-300" aria-label="Toggle theme">
+                    <i class="fas fa-moon dark-icon"></i>
+                    <i class="fas fa-sun light-icon hidden"></i>
+                </button>
+
                 <button class="md:hidden text-white text-2xl" id="mobile-menu-button">
                     ☰
                 </button>
@@ -302,60 +154,7 @@
         </div>
     </section>
 
-    <script>
-        // Cargar los intereses desde el archivo JSON
-        fetch('interests.json')
-            .then(response => response.json())
-            .then(data => {
-                // Actualizar el título de la sección
-                document.getElementById('interests-title').textContent = data.title.es;
-                document.getElementById('interests-title').setAttribute('data-es', data.title.es);
-                document.getElementById('interests-title').setAttribute('data-en', data.title.en);
-                
-                // Contenedor de intereses
-                const interestsContainer = document.getElementById('interests-container');
-                
-                // Crear elementos para cada interés
-                data.interests.forEach(interest => {
-                    const interestElement = document.createElement('div');
-                    interestElement.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer interest-item';
-                    
-                    interestElement.innerHTML = `
-                        <div class="h-48 bg-orange-500 flex items-center justify-center">
-                            <i class="${interest.icon} text-white text-6xl"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2" data-es="${interest.title.es}" data-en="${interest.title.en}">${interest.title.es}</h3>
-                            <p data-es="${interest.description.es}" data-en="${interest.description.en}">
-                                ${interest.description.es}
-                            </p>
-                        </div>
-                    `;
-                    
-                    // Añadir evento de clic para abrir el modal con la imagen correspondiente
-                    interestElement.addEventListener('click', () => {
-                        openImageModal(interest.image, interest.title.es);
-                    });
-                    
-                    interestsContainer.appendChild(interestElement);
-                });
-                
-                // Añadir estilos para el efecto hover similar a la galería
-                const style = document.createElement('style');
-                style.textContent = `
-                    .interest-item {
-                        transition: transform 0.3s;
-                    }
-                    
-                    .interest-item:hover {
-                        transform: scale(1.05);
-                        z-index: 10;
-                    }
-                `;
-                document.head.appendChild(style);
-            })
-            .catch(error => console.error('Error cargando intereses:', error));
-    </script>
+
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-100 dark:bg-gray-900">
@@ -443,7 +242,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
                     <div class="flex items-center space-x-2">
-                        <div class="flex items-center justify-center" style="width: px; height: 60px; padding: 2px;">
+                        <div class="flex items-center justify-center" style="height: 60px; padding: 2px;">
                             <img src="images/agua.PNG" alt="Logo Agua" class="w-full h-full object-contain">
                         </div>
                     </div>
@@ -456,8 +255,8 @@
                 </div>
                 
                 <div class="text-center md:text-right">
-                    <p class="text-sm" data-es="Hecho con amor ❤️ desde Iquique - Chile" 
-                       data-en="Made with love ❤️ from Iquique - Chile">
+                    <p class="text-sm" data-es="Hecho con ❤️ desde Iquique - Chile" 
+                       data-en="Made with ❤️ from Iquique - Chile">
                         Hecho con amor ❤️ desde Iquique - Chile
                     </p>
                     <p class="text-xs mt-1">© 2023 Pablo Carmona. Todos los derechos reservados.</p>
@@ -473,344 +272,23 @@
         </div>
     </div>
     
-    <style>
-        /* Estilos adicionales para el modal de imágenes */
-        #imageModal.opacity-100 #modalImage {
-            transform: scale(1);
-        }
-        
-        /* Prevenir selección de texto en todo el modal */
-        #imageModal * {
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-    </style>
+    <!-- Overlay de salida para enlaces externos -->
+    <div id="exitOverlay" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-90">
+        <div class="max-w-lg mx-auto p-8 text-center">
+            <div class="flex items-center justify-center mb-6" style="height: 80px;">
+                <img src="images/agua.PNG" alt="Logo" class="h-full object-contain">
+            </div>
+            <p class="text-white text-lg mb-6 leading-relaxed" id="exitMessage">
+                Gracias por visitarnos!<br><br>
+                Ahora estas saliendo de la pagina personal de Pablo Carmona.<br><br>
+                Te estamos redirigiendo a su perfil de Hardcover -una aplicacion libre de rastreo de lectura- donde podras revisar sus libros leidos, lecturas actuales y su lista de deseos.
+            </p>
+            <p class="text-orange-400 text-sm mb-6" id="exitCountdown">Redirigiendo en 10 segundos...</p>
+            <button id="exitCancelBtn" class="px-6 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-500 transition duration-300">
+                Cancelar
+            </button>
+        </div>
+    </div>
 
-    <script>
-        // Load content from JSON
-        async function loadContent() {
-            try {
-                const response = await fetch('content.json');
-                const content = await response.json();
-                
-                // Load About section content
-                document.getElementById('about-title').textContent = content.about.title.es;
-                document.getElementById('about-title').setAttribute('data-es', content.about.title.es);
-                document.getElementById('about-title').setAttribute('data-en', content.about.title.en);
-                
-                document.getElementById('about-name').textContent = content.about.intro.name.es;
-                document.getElementById('about-name').setAttribute('data-es', content.about.intro.name.es);
-                document.getElementById('about-name').setAttribute('data-en', content.about.intro.name.en);
-                
-                document.getElementById('about-description').textContent = content.about.intro.description.es;
-                document.getElementById('about-description').setAttribute('data-es', content.about.intro.description.es);
-                document.getElementById('about-description').setAttribute('data-en', content.about.intro.description.en);
-                
-                document.getElementById('skills-title').textContent = content.about.skills.title.es;
-                document.getElementById('skills-title').setAttribute('data-es', content.about.skills.title.es);
-                document.getElementById('skills-title').setAttribute('data-en', content.about.skills.title.en);
-                
-                // Load skills
-                const skillsContainer = document.getElementById('skills-container');
-                content.about.skills.items.forEach(skill => {
-                    const skillSpan = document.createElement('span');
-                    skillSpan.className = 'px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full';
-                    skillSpan.textContent = skill;
-                    skillsContainer.appendChild(skillSpan);
-                });
-                
-                document.getElementById('experience-title').textContent = content.about.experience.title.es;
-                document.getElementById('experience-title').setAttribute('data-es', content.about.experience.title.es);
-                document.getElementById('experience-title').setAttribute('data-en', content.about.experience.title.en);
-                
-                // Load experience items
-                const experienceContainer = document.getElementById('experience-container');
-                content.about.experience.jobs.forEach((job, index) => {
-                    const isLast = index === content.about.experience.jobs.length - 1;
-                    const jobDiv = document.createElement('div');
-                    jobDiv.className = isLast ? 'relative timeline-item' : 'mb-8 relative timeline-item';
-                    
-                    const title = document.createElement('h5');
-                    title.className = 'font-semibold';
-                    title.textContent = job.title;
-                    
-                    const period = document.createElement('p');
-                    period.className = 'text-sm text-gray-500 dark:text-gray-400';
-                    period.textContent = `${job.company} | ${job.period}`;
-                    
-                    const description = document.createElement('p');
-                    description.textContent = job.description.es;
-                    description.setAttribute('data-es', job.description.es);
-                    description.setAttribute('data-en', job.description.en);
-                    
-                    jobDiv.appendChild(title);
-                    jobDiv.appendChild(period);
-                    jobDiv.appendChild(description);
-                    experienceContainer.appendChild(jobDiv);
-                });
-                
-                // Load CTA button text
-                document.getElementById('about-cta').textContent = content.about.cta.es;
-                document.getElementById('about-cta').setAttribute('data-es', content.about.cta.es);
-                document.getElementById('about-cta').setAttribute('data-en', content.about.cta.en);
-                
-                // Load navigation text
-                document.getElementById('nav-about').textContent = content.navigation.about.es;
-                document.getElementById('nav-about').setAttribute('data-es', content.navigation.about.es);
-                document.getElementById('nav-about').setAttribute('data-en', content.navigation.about.en);
-                
-                document.getElementById('mobile-nav-about').textContent = content.navigation.about.es;
-                document.getElementById('mobile-nav-about').setAttribute('data-es', content.navigation.about.es);
-                document.getElementById('mobile-nav-about').setAttribute('data-en', content.navigation.about.en);
-                
-            } catch (error) {
-                console.error('Error loading content:', error);
-            }
-        }
-        
-        // Gallery Data will be loaded from gallery.json
-        let galleryItems = [];
-        
-        // Load gallery data
-        async function loadGalleryData() {
-            try {
-                const response = await fetch('gallery.json');
-                const data = await response.json();
-                galleryItems = data.items;
-            } catch (error) {
-                console.error('Error loading gallery data:', error);
-            }
-        }
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Load content from JSON
-            loadContent();
-            
-            // Load gallery data
-            await loadGalleryData();
-            
-            // Initialize dark mode from localStorage
-            const darkMode = localStorage.getItem('darkMode') === 'true';
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-                document.body.classList.remove('light-mode');
-                document.querySelector('.light-icon').classList.add('hidden');
-                document.querySelector('.dark-icon').classList.remove('hidden');
-            }
-
-            // Initialize language from localStorage
-            const language = localStorage.getItem('language') || 'es';
-            setLanguage(language);
-
-            // Initialize gallery
-            renderGallery('all');
-
-            // Mobile menu toggle
-            document.getElementById('mobile-menu-button').addEventListener('click', function() {
-                const menu = document.getElementById('mobile-menu');
-                menu.classList.toggle('hidden');
-            });
-
-            // Smooth scrolling for navigation
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Close mobile menu if open
-                        document.getElementById('mobile-menu').classList.add('hidden');
-                    }
-                });
-            });
-
-            // Dark mode toggle
-            document.querySelector('.mode-toggle').addEventListener('click', function() {
-                const isDarkMode = document.body.classList.contains('dark-mode');
-                
-                if (isDarkMode) {
-                    document.body.classList.remove('dark-mode');
-                    document.body.classList.add('light-mode');
-                    document.querySelector('.light-icon').classList.remove('hidden');
-                    document.querySelector('.dark-icon').classList.add('hidden');
-                    localStorage.setItem('darkMode', 'false');
-                } else {
-                    document.body.classList.remove('light-mode');
-                    document.body.classList.add('dark-mode');
-                    document.querySelector('.light-icon').classList.add('hidden');
-                    document.querySelector('.dark-icon').classList.remove('hidden');
-                    localStorage.setItem('darkMode', 'true');
-                }
-            });
-
-            // Language toggle
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    setLanguage(lang);
-                    
-                    // Update active state
-                    document.querySelectorAll('.language-option').forEach(opt => {
-                        opt.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                });
-            });
-
-            // Gallery filter buttons
-            document.querySelectorAll('.filter-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const category = this.getAttribute('data-category');
-                    
-                    // Update active state
-                    document.querySelectorAll('.filter-btn').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    // Render filtered gallery
-                    renderGallery(category);
-                });
-            });
-
-            // Copy email button
-            document.querySelector('.copy-btn').addEventListener('click', function() {
-                const email = document.getElementById('email-address').textContent;
-                navigator.clipboard.writeText(email);
-                
-                // Update button text and style
-                const currentLang = localStorage.getItem('language') || 'es';
-                this.textContent = currentLang === 'es' ? 'Copiado!' : 'Copied!';
-                this.classList.add('copied');
-                
-                // Reset after 2 seconds
-                setTimeout(() => {
-                    this.textContent = currentLang === 'es' ? 'Copiar' : 'Copy';
-                    this.classList.remove('copied');
-                }, 2000);
-            });
-        });
-
-        // Set language function
-        function setLanguage(lang) {
-            localStorage.setItem('language', lang);
-            
-            // Update all elements with data attributes
-            document.querySelectorAll('[data-es], [data-en]').forEach(element => {
-                if (element.hasAttribute(`data-${lang}`)) {
-                    const text = element.getAttribute(`data-${lang}`);
-                    
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = text;
-                    } else {
-                        element.textContent = text;
-                    }
-                }
-            });
-            
-            // Update gallery descriptions if needed
-            const currentCategory = document.querySelector('.filter-btn.active')?.getAttribute('data-category') || 'all';
-            renderGallery(currentCategory);
-        }
-
-        // Render gallery function
-        function renderGallery(category) {
-            const galleryContainer = document.querySelector('.gallery-container');
-            const currentLang = localStorage.getItem('language') || 'es';
-            
-            // Clear existing items
-            galleryContainer.innerHTML = '';
-            
-            // Check if gallery items are loaded
-            if (galleryItems.length === 0) {
-                console.error('Gallery items not loaded yet');
-                return;
-            }
-            
-            // Filter items by category
-            const filteredItems = category === 'all' 
-                ? galleryItems 
-                : galleryItems.filter(item => item.category === category);
-            
-            // Render filtered items
-            filteredItems.forEach(item => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer';
-                
-                galleryItem.innerHTML = `
-                    <div class="h-48 overflow-hidden">
-                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold mb-1">${item.title}</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-300">${item.description[currentLang]}</p>
-                    </div>
-                `;
-                
-                // Añadir evento de clic para abrir el modal
-                galleryItem.addEventListener('click', () => {
-                    openImageModal(item.image, item.title);
-                });
-                
-                galleryContainer.appendChild(galleryItem);
-            });
-        }
-        
-        // Funciones para el modal de imágenes
-        function openImageModal(imageSrc, imageAlt) {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            
-            // Establecer la imagen en el modal
-            modalImage.src = imageSrc;
-            modalImage.alt = imageAlt;
-            
-            // Mostrar el modal con animación
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.add('opacity-100');
-            }, 10);
-            
-            // Añadir eventos para cerrar el modal
-            modal.addEventListener('click', closeImageModal);
-            document.addEventListener('keydown', closeImageModalOnKey);
-        }
-        
-        function closeImageModal(event) {
-            // Solo cerrar si se hace clic fuera de la imagen
-            if (event.target.id === 'imageModal') {
-                const modal = document.getElementById('imageModal');
-                modal.classList.remove('opacity-100');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                }, 300);
-                
-                // Eliminar eventos
-                modal.removeEventListener('click', closeImageModal);
-                document.removeEventListener('keydown', closeImageModalOnKey);
-            }
-        }
-        
-        function closeImageModalOnKey(event) {
-            // Cerrar con cualquier tecla
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('opacity-100');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-            
-            // Eliminar eventos
-            modal.removeEventListener('click', closeImageModal);
-            document.removeEventListener('keydown', closeImageModalOnKey);
-        }
-    </script>
+    <script src="script.js"></script>
 </html>

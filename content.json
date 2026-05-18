@@ -10,8 +10,8 @@
         "en": "Hi, I'm Pablo"
       },
       "description": {
-        "es": "Soy un apasionado buzo autonomo y fotografo, con base en Iquique, Chile. Sin ser mi profesion disfruto de la tecnologia y la IA y me gusta crear Webs App y sitios como este, donde aprovecho tener presentar las capturas que hago bajo y sobre el agua.",
-        "en": "I'm a passionate freelance diver and photographer based in Iquique, Chile. While it's not my profession, I enjoy technology and AI, and I like creating web apps and sites like this one, where I take advantage of the opportunity to showcase my underwater and underwater captures."
+        "es": "Aunque la odontología es mi profesión, me apasiona explorar la tecnología y la inteligencia artificial como motores de innovación.  Con base en Iquique, Chile, y con un gran amor por el buceo autónomo y la fotografía, disfruto optimizando y automatizando procesos, descubriendo herramientas avanzadas y manteniéndome en constante aprendizaje del mundo digital.",
+        "en": "Although dentistry is my profession, I am passionate about exploring technology and artificial intelligence as drivers of innovation. Based in Iquique, Chile, and with a deep love for scuba diving and photography, I enjoy optimizing and automating processes, discovering advanced tools, and constantly learning in the digital world."
       }
     },
     "skills": {
@@ -23,9 +23,9 @@
         "Master Scuba Diver",
         "Fotografia",
         "Claude AI",
+        "Google AI",
         "DeepSeek AI",
-        "Trae IDE",
-        "Windsurf IDE"
+        "Open Code"
       ]
     },
     "experience": {
@@ -39,7 +39,7 @@
           "company": "PADI",
           "period": "2015 - Presente",
           "description": {
-            "es": "Desarrollo de interfaces de usuario responsivas y accesibles.",
+            "es": "Rescue Diver con 5 Especialidades, Deep Diver, Nitrox, Peek Performance Bouyancy, Sidemount, Dry Suit.",
             "en": "Development of responsive and accessible user interfaces."
           }
         },

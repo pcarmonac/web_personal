@@ -11,8 +11,8 @@
           "en": "Diving"
         },
         "description": {
-          "es": "Amante del océano y el buceo. Certificado PADI con más de 50 inmersiones.",
-          "en": "Ocean lover and scuba diver. PADI certified with over 50 dives."
+          "es": "Amante del océano y el buceo. Certificado PADI, TDI, IANTD con más de 100 inmersiones.",
+          "en": "Ocean lover and scuba diver. PADI, TDI, IANTD certified with over 100 dives."
         },
         "image": "images/diving.jpg"
       },
@@ -23,10 +23,12 @@
         "en": "Books"
       },
       "description": {
-        "es": "Toco la guitarra y disfruto componer mis propias canciones en mi tiempo libre.",
-        "en": "I play guitar and enjoy composing my own songs in my free time."
+        "es": "Explora mi biblioteca en Hardcover, una plataforma libre de seguimiento donde comparto los libros que leo, he leído y quiero leer.",
+        "en": "Discover the books that keep me company, my current reads, and my upcoming literary goals on a tracker-free platform."
       },
-      "image": "images/music.jpg"
+      "image": "images/music.jpg",
+      "link": "https://hardcover.app/@pcarmonac",
+      "linkDelay": 10
     },
     {
       "icon": "fas fa-laptop-code",
@@ -35,8 +37,8 @@
         "en": "Technology"
       },
       "description": {
-        "es": "Siempre explorando las últimas tendencias en desarrollo web y diseño de interfaces.",
-        "en": "Always exploring the latest trends in web development and interface design."
+        "es": "Próximamente: Un espacio dedicado a mi portafolio de desarrollo, proyectos de software y experimentos con hardware.",
+        "en": "Coming soon: A space dedicated to my development portfolio, software projects, and hardware experiments."
       },
       "image": "images/tech.jpg"
     }
