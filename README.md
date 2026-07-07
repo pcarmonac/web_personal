@@ -1,58 +1,69 @@
-# Personal Landing Page
+# Pablo Carmona — Sitio Personal
 
-This repository contains the source code for my personal landing page. The website showcases my portfolio, projects, and interests. It is designed to be visually appealing, responsive, and bilingual (Spanish and English).
+[![pablocarmona.cl](https://img.shields.io/badge/live-pablocarmona.cl-orange)](https://pablocarmona.cl)
 
-## 🛠️ Technologies Used
+Portfolio personal de Pablo Carmona: odontólogo, buzo PADI, fotógrafo y entusiasta de la tecnología. Una sola página que unifica identidades sin sentirse como un template.
 
-- **HTML5**: Structure of the webpage.
-- **CSS3**: Styling with TailwindCSS and custom styles.
-- **JavaScript**: Interactive features and dynamic content loading.
-- **Font Awesome**: Icons for social links and other UI elements.
-- **JSON**: Data for skills, experiences, interests, and gallery.
+## Stack
 
-## 🌟 Features
+HTML + **TailwindCSS v3.4** (CDN) + CSS propio + JS vanilla. Sin frameworks ni bundlers. **Schibsted Grotesk** como tipografía única vía Google Fonts. Iconos SVG inline (`icons.js`). GitHub Pages + dominio `pablocarmona.cl`.
 
-1. **Dark Mode Support**: Toggle between light and dark modes with a button.
-2. **Bilingual Content**: Texts are available in Spanish and English, with an easy switch option.
-3. **Dynamic Sections**:
-    - **Gallery**: Displays projects and photos filtered by category.
-    - **Skills & Experience**: Loaded dynamically from JSON files.
-    - **Interests**: Interactive and visually separated content.
-4. **Mobile Responsive Design**: Optimized for both desktop and mobile devices.
-5. **Smooth Scrolling**: Navigation anchors with smooth scrolling effects.
-6. **Image Modals**: Clickable images in the gallery open in a full-screen modal.
-7. **Social Links**: Direct links to my social media profiles.
+## Lo que hace
 
-## 📂 Project Structure
+- **Bilingüe** — español e inglés con persistencia en localStorage, `hreflang` tags con self-referencing y `lang` dinámico
+- **Parallax** — fondo fijo con aceleración GPU, sin `background-attachment: fixed` (roto en iOS)
+- **Galería** — filtros por categoría, thumbnails (90KB) + fotos optimizadas (250KB), modal con teclado
+- **Intereses** — Buceo (scroll a About), Libros (exit overlay → Hardcover), Tecnología (scroll a Contacto)
+- **Contacto** — email ofuscado en JS, formulario con validación, redes sociales con touch targets WCAG
+- **Modo oscuro fijo** — diseñado para light-on-dark, sin toggle
+- **SEO** — meta description, Open Graph, Twitter card, JSON-LD Person, sitemap, robots.txt, canonical + hreflang con self-referencing
+- **A11y** — skip-link, `aria-current`, `aria-expanded`, touch targets 44px, `prefers-reduced-motion`
+- **Performance** — imágenes comprimidas 97% (44MB → 1.1MB), lazy loading, 0 dependencias de iconos externos
 
-- `index.html`: Main HTML file with the structure and layout.
-- `gallery.json`: Contains data for gallery items.
-- `interests.json`: Contains data for interests displayed.
-- `images/`: Folder for all image assets, including profile and gallery images.
-- `styles/`: Custom CSS for additional styling.
+## Estructura
 
-## 🚀 Getting Started
+```
+index.html        → Página principal
+style.css         → Estilos + fluid typography + wave dividers
+script.js         → Lógica: galería, modal, idioma, menú, event delegation
+icons.js          → 13 iconos SVG inline
+content.json      → About: descripción, skills, experiencia (bilingüe, 3 jobs)
+gallery.json      → Galería: thumbnails + full-size, categorías
+interests.json    → Intereses: acciones link / target / image
+images/           → perfil.jpg, fondo.jpg, favicon.JPG, agua.PNG
+Fotos/            → Optimizadas (~250KB c/u)
+Fotos/thumbs/     → Thumbnails (~90KB c/u)
+Fotos/original/   → Backup de originales (9-12MB)
+CNAME             → pablocarmona.cl
+robots.txt        → SEO
+sitemap.xml       → SEO
+PRODUCT.md        → Contexto de diseño
+AGENTS.md         → Guía para agentes
+```
 
-To view the site locally:
+## Desarrollo local
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/pcarmonac/web_personal.git
-   ```
-2. Open `index.html` in your browser.
+```bash
+python3 -m http.server 8080
+# → http://localhost:8080
+```
 
-## 🌐 Live Demo
+Sin dependencias. Sin `npm install`. Solo un servidor estático.
 
-You can check out the live version of the website [here](https://pcarmonac.github.io/web_personal).
+## Restore points
 
-## 🤝 Contributing
+```bash
+git log --oneline          # ver checkpoints
+git checkout 7b4a6c9       # revertir cambios de diseño
+```
 
-Contributions are welcome! Feel free to fork the repository and submit a pull request for any improvements or new features.
+## Pendientes
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+Ver `AGENTS.md` para la lista completa. Los principales:
+- Formulario sin backend (solo feedback visual)
+- Contraste white-on-orange en Contact (WCAG AA)
+- Sin imágenes WebP ni srcset responsivo
 
 ---
 
-### Made with ❤️ in Iquique, Chile
+Hecho con ❤️ desde Iquique, Chile
