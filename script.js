@@ -29,12 +29,10 @@ async function loadInterests() {
 
             const iconName = interest.icon.replace(/^fa[sb] fa-/, '');
             el.innerHTML = `
-                <div class="aspect-[16/9] bg-orange-500 flex items-center justify-center">
-                    <span class="icon interest-icon">${renderIcon(iconName)}</span>
-                </div>
-                <div class="p-6">
+                <div class="p-8 pt-10 text-center">
+                    <span class="icon interest-icon inline-block mb-5">${renderIcon(iconName)}</span>
                     <h3 class="text-xl font-semibold mb-2" data-es="${interest.title.es}" data-en="${interest.title.en}">${interest.title.es}</h3>
-                    <p data-es="${interest.description.es}" data-en="${interest.description.en}">
+                    <p class="text-gray-600 dark:text-gray-400" data-es="${interest.description.es}" data-en="${interest.description.en}">
                         ${interest.description.es}
                     </p>
                 </div>
@@ -299,11 +297,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     setLanguage(lang);
 
     // Mobile menu
-    document.getElementById('mobile-menu-button').addEventListener('click', function () {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-        this.setAttribute('aria-expanded', !menu.classList.contains('hidden'));
-    });
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileBackdrop = document.getElementById('mobile-backdrop');
+    const mobileBtn = document.getElementById('mobile-menu-button');
+
+    function toggleMobileMenu() {
+        const open = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        mobileBackdrop.classList.toggle('hidden');
+        mobileBtn.setAttribute('aria-expanded', !open);
+    }
+
+    mobileBtn.addEventListener('click', toggleMobileMenu);
+    mobileBackdrop.addEventListener('click', toggleMobileMenu);
 
     // Event delegation: smooth scroll, language, filters
     document.addEventListener('click', function (e) {
@@ -327,9 +333,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (anchor) {
             e.preventDefault();
             scrollToSection(anchor.getAttribute('href'));
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.add('hidden');
-            document.getElementById('mobile-menu-button').setAttribute('aria-expanded', 'false');
+            mobileMenu.classList.add('hidden');
+            mobileBackdrop.classList.add('hidden');
+            mobileBtn.setAttribute('aria-expanded', 'false');
         }
     });
 

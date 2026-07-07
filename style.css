@@ -23,19 +23,43 @@ body {
     background-color: var(--bg);
     color: var(--text);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 h1, h2, h3, h4, .display {
     font-family: 'DM Serif Display', Georgia, serif;
 }
 
+.fluid-hero {
+    font-size: clamp(2.5rem, 5vw + 1rem, 7rem);
+    font-weight: 400;
+}
+
 .icon svg { width: 100%; height: 100%; }
 .icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; }
 .icon-lg { width: 1.25em; height: 1.25em; }
-.interest-icon { width: 3.75rem; height: 3.75rem; color: white; }
+.interest-icon { width: 3.75rem; height: 3.75rem; color: var(--primary); }
+.interest-item {
+    border-top: 3px solid transparent;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.interest-item:hover {
+    transform: translateY(-4px);
+    border-top-color: var(--primary);
+    box-shadow: 0 8px 30px rgba(255, 140, 0, 0.15);
+}
 
 .wave-divider { line-height: 0; }
 .wave-divider svg { display: block; }
+
+.mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(0, 0, 0, 0.6);
+}
 
 .profile-photo {
     box-shadow:
@@ -100,15 +124,6 @@ h1, h2, h3, h4, .display {
 }
 
 .gallery-item:hover {
-    transform: scale(1.05);
-    z-index: 10;
-}
-
-.interest-item {
-    transition: transform 0.3s;
-}
-
-.interest-item:hover {
     transform: scale(1.05);
     z-index: 10;
 }
@@ -210,8 +225,11 @@ h1, h2, h3, h4, .display {
         animation: none;
     }
 
-    .gallery-item:hover,
+    .gallery-item:hover {
+        transform: none;
+    }
     .interest-item:hover {
         transform: none;
+        box-shadow: none;
     }
 }
