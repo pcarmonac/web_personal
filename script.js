@@ -1,44 +1,76 @@
+// === Helpers ===
+function scrollToSection(selector) {
+    const target = document.querySelector(selector);
+    if (target) {
+        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+    }
+}
+
+function setBilingual(el, es, en) {
+    el.textContent = es;
+    el.dataset.es = es;
+    el.dataset.en = en;
+}
+
 // === Interests ===
-function loadInterests() {
-    fetch('interests.json')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('interests-title').textContent = data.title.es;
-            document.getElementById('interests-title').setAttribute('data-es', data.title.es);
-            document.getElementById('interests-title').setAttribute('data-en', data.title.en);
+async function loadInterests() {
+    try {
+        const response = await fetch('interests.json');
+        const data = await response.json();
 
-            const container = document.getElementById('interests-container');
+        setBilingual(document.getElementById('interests-title'), data.title.es, data.title.en);
 
-            data.interests.forEach(interest => {
-                const el = document.createElement('div');
-                el.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer interest-item';
+        const container = document.getElementById('interests-container');
 
-                el.innerHTML = `
-                    <div class="h-48 bg-orange-500 flex items-center justify-center">
-                        <i class="${interest.icon} text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2" data-es="${interest.title.es}" data-en="${interest.title.en}">${interest.title.es}</h3>
-                        <p data-es="${interest.description.es}" data-en="${interest.description.en}">
-                            ${interest.description.es}
-                        </p>
-                    </div>
-                `;
+        data.interests.forEach(interest => {
+            const el = document.createElement('div');
+            el.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer interest-item focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500';
+            el.setAttribute('tabindex', '0');
 
-                if (interest.link) {
-                    el.addEventListener('click', () => {
+            const iconName = interest.icon.replace(/^fa[sb] fa-/, '');
+            el.innerHTML = `
+                <div class="aspect-[16/9] bg-orange-500 flex items-center justify-center">
+                    <span class="icon interest-icon">${renderIcon(iconName)}</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2" data-es="${interest.title.es}" data-en="${interest.title.en}">${interest.title.es}</h3>
+                    <p data-es="${interest.description.es}" data-en="${interest.description.en}">
+                        ${interest.description.es}
+                    </p>
+                </div>
+            `;
+
+            if (interest.link) {
+                el.addEventListener('click', () => showExitOverlay(interest.link, interest.linkDelay || 10));
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
                         showExitOverlay(interest.link, interest.linkDelay || 10);
-                    });
-                } else {
-                    el.addEventListener('click', () => {
+                    }
+                });
+            } else if (interest.target) {
+                el.addEventListener('click', () => scrollToSection(interest.target));
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        scrollToSection(interest.target);
+                    }
+                });
+            } else if (interest.image) {
+                el.addEventListener('click', () => openImageModal(interest.image, interest.title.es));
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
                         openImageModal(interest.image, interest.title.es);
-                    });
-                }
+                    }
+                });
+            }
 
-                container.appendChild(el);
-            });
-        })
-        .catch(error => console.error('Error cargando intereses:', error));
+            container.appendChild(el);
+        });
+    } catch (error) {
+        console.error('Error cargando intereses:', error);
+    }
 }
 
 // === About content ===
@@ -47,23 +79,13 @@ async function loadContent() {
         const response = await fetch('content.json');
         const content = await response.json();
 
-        document.getElementById('about-title').textContent = content.about.title.es;
-        document.getElementById('about-title').setAttribute('data-es', content.about.title.es);
-        document.getElementById('about-title').setAttribute('data-en', content.about.title.en);
-
-        document.getElementById('about-name').textContent = content.about.intro.name.es;
-        document.getElementById('about-name').setAttribute('data-es', content.about.intro.name.es);
-        document.getElementById('about-name').setAttribute('data-en', content.about.intro.name.en);
-
-        document.getElementById('about-description').textContent = content.about.intro.description.es;
-        document.getElementById('about-description').setAttribute('data-es', content.about.intro.description.es);
-        document.getElementById('about-description').setAttribute('data-en', content.about.intro.description.en);
-
-        document.getElementById('skills-title').textContent = content.about.skills.title.es;
-        document.getElementById('skills-title').setAttribute('data-es', content.about.skills.title.es);
-        document.getElementById('skills-title').setAttribute('data-en', content.about.skills.title.en);
+        setBilingual(document.getElementById('about-title'), content.about.title.es, content.about.title.en);
+        setBilingual(document.getElementById('about-name'), content.about.intro.name.es, content.about.intro.name.en);
+        setBilingual(document.getElementById('about-description'), content.about.intro.description.es, content.about.intro.description.en);
+        setBilingual(document.getElementById('skills-title'), content.about.skills.title.es, content.about.skills.title.en);
 
         const skillsContainer = document.getElementById('skills-container');
+        skillsContainer.innerHTML = '';
         content.about.skills.items.forEach(skill => {
             const span = document.createElement('span');
             span.className = 'px-3 py-1 bg-orange-100 dark:bg-orange-900 rounded-full';
@@ -71,11 +93,10 @@ async function loadContent() {
             skillsContainer.appendChild(span);
         });
 
-        document.getElementById('experience-title').textContent = content.about.experience.title.es;
-        document.getElementById('experience-title').setAttribute('data-es', content.about.experience.title.es);
-        document.getElementById('experience-title').setAttribute('data-en', content.about.experience.title.en);
+        setBilingual(document.getElementById('experience-title'), content.about.experience.title.es, content.about.experience.title.en);
 
         const experienceContainer = document.getElementById('experience-container');
+        experienceContainer.innerHTML = '';
         content.about.experience.jobs.forEach((job, index) => {
             const isLast = index === content.about.experience.jobs.length - 1;
             const jobDiv = document.createElement('div');
@@ -90,9 +111,7 @@ async function loadContent() {
             period.textContent = `${job.company} | ${job.period}`;
 
             const description = document.createElement('p');
-            description.textContent = job.description.es;
-            description.setAttribute('data-es', job.description.es);
-            description.setAttribute('data-en', job.description.en);
+            setBilingual(description, job.description.es, job.description.en);
 
             jobDiv.appendChild(title);
             jobDiv.appendChild(period);
@@ -117,9 +136,9 @@ async function loadGalleryData() {
     }
 }
 
-function renderGallery(category) {
+function renderGallery(category, lang) {
     const galleryContainer = document.querySelector('.gallery-container');
-    const currentLang = localStorage.getItem('language') || 'es';
+    const currentLang = lang || localStorage.getItem('language') || 'es';
 
     galleryContainer.innerHTML = '';
 
@@ -134,11 +153,13 @@ function renderGallery(category) {
 
     filteredItems.forEach(item => {
         const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer';
+        galleryItem.className = 'gallery-item bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500';
+        galleryItem.setAttribute('tabindex', '0');
 
+        const thumbSrc = item.thumb || item.image;
         galleryItem.innerHTML = `
-            <div class="h-48 overflow-hidden">
-                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="${thumbSrc}" alt="${item.title}" class="w-full h-full object-cover" loading="lazy" decoding="async">
             </div>
             <div class="p-4">
                 <h3 class="font-semibold mb-1">${item.title}</h3>
@@ -150,6 +171,13 @@ function renderGallery(category) {
             openImageModal(item.image, item.title);
         });
 
+        galleryItem.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openImageModal(item.image, item.title);
+            }
+        });
+
         galleryContainer.appendChild(galleryItem);
     });
 }
@@ -158,42 +186,26 @@ function renderGallery(category) {
 function openImageModal(imageSrc, imageAlt) {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
-
     modalImage.src = imageSrc;
     modalImage.alt = imageAlt;
-
     modal.classList.remove('hidden');
-    setTimeout(() => {
-        modal.classList.add('opacity-100');
-    }, 10);
-
-    modal.addEventListener('click', closeImageModal);
-    document.addEventListener('keydown', closeImageModalOnKey);
+    requestAnimationFrame(() => modal.classList.add('opacity-100'));
 }
 
-function closeImageModal(event) {
-    if (event.target.id === 'imageModal') {
-        const modal = document.getElementById('imageModal');
-        modal.classList.remove('opacity-100');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 300);
-
-        modal.removeEventListener('click', closeImageModal);
-        document.removeEventListener('keydown', closeImageModalOnKey);
-    }
-}
-
-function closeImageModalOnKey(event) {
+function closeImageModal() {
     const modal = document.getElementById('imageModal');
+    if (modal.classList.contains('hidden')) return;
     modal.classList.remove('opacity-100');
-    setTimeout(() => {
-        modal.classList.add('hidden');
-    }, 300);
-
-    modal.removeEventListener('click', closeImageModal);
-    document.removeEventListener('keydown', closeImageModalOnKey);
+    setTimeout(() => modal.classList.add('hidden'), 300);
 }
+
+document.getElementById('imageModal').addEventListener('click', function (e) {
+    if (e.target === this) closeImageModal();
+});
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeImageModal();
+});
 
 // === Exit overlay ===
 let exitTimer = null;
@@ -201,10 +213,17 @@ let exitTimer = null;
 function showExitOverlay(url, delay) {
     const overlay = document.getElementById('exitOverlay');
     const countdown = document.getElementById('exitCountdown');
+    const lang = localStorage.getItem('language') || 'es';
     let remaining = delay;
 
-    countdown.textContent = `Redirigiendo en ${remaining} segundos...`;
+    document.getElementById('exitMessage').textContent = document.getElementById('exitMessage').getAttribute(`data-${lang}`);
+    document.getElementById('exitCancelBtn').textContent = document.getElementById('exitCancelBtn').getAttribute(`data-${lang}`);
+
+    const template = countdown.getAttribute(`data-${lang}`);
+    countdown.textContent = template.replace('{n}', remaining);
     overlay.classList.remove('hidden');
+
+    if (exitTimer) clearInterval(exitTimer);
 
     exitTimer = setInterval(() => {
         remaining--;
@@ -212,7 +231,7 @@ function showExitOverlay(url, delay) {
             clearInterval(exitTimer);
             window.location.href = url;
         } else {
-            countdown.textContent = `Redirigiendo en ${remaining} segundos...`;
+            countdown.textContent = template.replace('{n}', remaining);
         }
     }, 1000);
 
@@ -225,6 +244,7 @@ function showExitOverlay(url, delay) {
 // === Language ===
 function setLanguage(lang) {
     localStorage.setItem('language', lang);
+    document.documentElement.lang = lang;
 
     document.querySelectorAll('[data-es], [data-en]').forEach(element => {
         if (element.hasAttribute(`data-${lang}`)) {
@@ -239,21 +259,7 @@ function setLanguage(lang) {
     });
 
     const currentCategory = document.querySelector('.filter-btn.active')?.getAttribute('data-category') || 'all';
-    renderGallery(currentCategory);
-}
-
-// === Theme ===
-function setTheme(isDark) {
-    if (isDark) {
-        document.body.classList.add('dark');
-        document.querySelector('.dark-icon')?.classList.remove('hidden');
-        document.querySelector('.light-icon')?.classList.add('hidden');
-    } else {
-        document.body.classList.remove('dark');
-        document.querySelector('.dark-icon')?.classList.add('hidden');
-        document.querySelector('.light-icon')?.classList.remove('hidden');
-    }
-    localStorage.setItem('darkMode', isDark);
+    renderGallery(currentCategory, lang);
 }
 
 // === Init ===
@@ -262,9 +268,29 @@ document.addEventListener('DOMContentLoaded', async function () {
     loadInterests();
     await loadGalleryData();
 
-    // Theme
-    const isDark = localStorage.getItem('darkMode') !== 'false';
-    setTheme(isDark);
+    // Copyright year
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+    // Initialize inline icons
+    document.querySelectorAll('[data-icon]').forEach(el => {
+        const name = el.getAttribute('data-icon');
+        el.innerHTML = renderIcon(name);
+    });
+
+    // Active nav tracking (IntersectionObserver)
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    link.setAttribute('aria-current', href === '#' + entry.target.id ? 'page' : 'false');
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+    sections.forEach(s => observer.observe(s));
 
     // Language
     const lang = localStorage.getItem('language') || 'es';
@@ -274,57 +300,45 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Mobile menu
     document.getElementById('mobile-menu-button').addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+        this.setAttribute('aria-expanded', !menu.classList.contains('hidden'));
     });
 
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-                document.getElementById('mobile-menu').classList.add('hidden');
-            }
-        });
-    });
-
-    // Theme toggle
-    document.querySelector('.mode-toggle').addEventListener('click', function () {
-        setTheme(!document.body.classList.contains('dark'));
-    });
-
-    // Language toggle
-    document.querySelectorAll('.language-option').forEach(opt => {
-        opt.addEventListener('click', function () {
+    // Event delegation: smooth scroll, language, filters
+    document.addEventListener('click', function (e) {
+        const langBtn = e.target.closest('.language-option');
+        if (langBtn) {
             document.querySelectorAll('.language-option').forEach(o => o.classList.remove('active'));
-            this.classList.add('active');
-            setLanguage(this.getAttribute('data-lang'));
-        });
-    });
+            langBtn.classList.add('active');
+            setLanguage(langBtn.getAttribute('data-lang'));
+            return;
+        }
 
-    // Gallery filters
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
+        const filterBtn = e.target.closest('.filter-btn');
+        if (filterBtn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            renderGallery(this.getAttribute('data-category'));
-        });
+            filterBtn.classList.add('active');
+            renderGallery(filterBtn.getAttribute('data-category'), localStorage.getItem('language') || 'es');
+            return;
+        }
+
+        const anchor = e.target.closest('a[href^="#"]');
+        if (anchor) {
+            e.preventDefault();
+            scrollToSection(anchor.getAttribute('href'));
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.add('hidden');
+            document.getElementById('mobile-menu-button').setAttribute('aria-expanded', 'false');
+        }
     });
 
-    // Copy email
-    document.querySelector('.copy-btn').addEventListener('click', function () {
-        const email = document.getElementById('email-address').textContent;
-        navigator.clipboard.writeText(email);
-
-        const currentLang = localStorage.getItem('language') || 'es';
-        this.textContent = currentLang === 'es' ? 'Copiado!' : 'Copied!';
-        this.classList.add('copied');
-
-        setTimeout(() => {
-            this.textContent = currentLang === 'es' ? 'Copiar' : 'Copy';
-            this.classList.remove('copied');
-        }, 2000);
+    // Email button (obfuscated)
+    document.getElementById('email-btn').addEventListener('click', function () {
+        const p1 = 'pcarmonac';
+        const p2 = 'gmail';
+        const p3 = 'com';
+        window.location.href = 'mailto:' + p1 + String.fromCharCode(64) + p2 + '.' + p3;
     });
 
     // Form handler
@@ -348,6 +362,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         setTimeout(() => {
             btn.disabled = false;
             feedback.remove();
+            this.reset();
         }, 3000);
     });
 });

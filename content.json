@@ -21,7 +21,7 @@
       },
       "items": [
         "Master Scuba Diver",
-        "Fotografia",
+        "Fotografía",
         "Claude AI",
         "Google AI",
         "DeepSeek AI",
@@ -40,25 +40,7 @@
           "period": "2015 - Presente",
           "description": {
             "es": "Rescue Diver con 5 Especialidades, Deep Diver, Nitrox, Peek Performance Bouyancy, Sidemount, Dry Suit.",
-            "en": "Development of responsive and accessible user interfaces."
-          }
-        },
-        {
-          "title": "UI Designer",
-          "company": "Creative Agency",
-          "period": "2018 - 2020",
-          "description": {
-            "es": "Diseño de interfaces y experiencias de usuario para clientes diversos.",
-            "en": "Designing interfaces and user experiences for diverse clients."
-          }
-        },
-        {
-          "title": "Web Developer",
-          "company": "Freelance",
-          "period": "2016 - 2018",
-          "description": {
-            "es": "Creación de sitios web personalizados para pequeñas empresas.",
-            "en": "Building custom websites for small businesses."
+            "en": "Rescue Diver with 5 Specialties, Deep Diver, Nitrox, Peak Performance Buoyancy, Sidemount, Dry Suit."
           }
         }
       ]

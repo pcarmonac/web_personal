@@ -5,6 +5,7 @@
       "title": "Sunset at the Beach",
       "category": "photography",
       "image": "Fotos/D02.JPG",
+      "thumb": "Fotos/thumbs/D02.jpg",
       "description": {
         "es": "Hermosa puesta de sol capturada en la playa Cavancha.",
         "en": "Beautiful sunset captured at Cavancha beach."
@@ -15,6 +16,7 @@
       "title": "Mountain Hike",
       "category": "travel",
       "image": "Fotos/D03.JPG",
+      "thumb": "Fotos/thumbs/D03.jpg",
       "description": {
         "es": "Excursión a las montañas de los Andes.",
         "en": "Hiking in the Andes mountains."
@@ -25,6 +27,7 @@
       "title": "E-commerce Website",
       "category": "projects",
       "image": "Fotos/D04.JPG",
+      "thumb": "Fotos/thumbs/D04.jpg",
       "description": {
         "es": "Plataforma de comercio electrónico desarrollada para un cliente.",
         "en": "E-commerce platform developed for a client."
@@ -35,6 +38,7 @@
       "title": "Street Photography",
       "category": "photography",
       "image": "Fotos/D05.JPG",
+      "thumb": "Fotos/thumbs/D05.jpg",
       "description": {
         "es": "Vida urbana capturada en el centro de Iquique.",
         "en": "Urban life captured in downtown Iquique."

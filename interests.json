@@ -14,7 +14,7 @@
           "es": "Amante del océano y el buceo. Certificado PADI, TDI, IANTD con más de 100 inmersiones.",
           "en": "Ocean lover and scuba diver. PADI, TDI, IANTD certified with over 100 dives."
         },
-        "image": "images/diving.jpg"
+        "target": "#about"
       },
     {
       "icon": "fas fa-book",
@@ -26,7 +26,6 @@
         "es": "Explora mi biblioteca en Hardcover, una plataforma libre de seguimiento donde comparto los libros que leo, he leído y quiero leer.",
         "en": "Discover the books that keep me company, my current reads, and my upcoming literary goals on a tracker-free platform."
       },
-      "image": "images/music.jpg",
       "link": "https://hardcover.app/@pcarmonac",
       "linkDelay": 10
     },
@@ -40,7 +39,7 @@
         "es": "Próximamente: Un espacio dedicado a mi portafolio de desarrollo, proyectos de software y experimentos con hardware.",
         "en": "Coming soon: A space dedicated to my development portfolio, software projects, and hardware experiments."
       },
-      "image": "images/tech.jpg"
+      "target": "#contact"
     }
   ]
 }
