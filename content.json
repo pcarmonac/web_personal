@@ -10,8 +10,8 @@
         "en": "Hi, I'm Pablo"
       },
       "description": {
-        "es": "Aunque la odontología es mi profesión, me apasiona explorar la tecnología y la inteligencia artificial como motores de innovación.  Con base en Iquique, Chile, y con un gran amor por el buceo autónomo y la fotografía, disfruto optimizando y automatizando procesos, descubriendo herramientas avanzadas y manteniéndome en constante aprendizaje del mundo digital.",
-        "en": "Although dentistry is my profession, I am passionate about exploring technology and artificial intelligence as drivers of innovation. Based in Iquique, Chile, and with a deep love for scuba diving and photography, I enjoy optimizing and automating processes, discovering advanced tools, and constantly learning in the digital world."
+        "es": "Odontólogo de profesión y tecnólogo por pasión. Vivo en Iquique, Chile, donde el océano y el buceo autónomo son parte de mi día a día. Me mueve la inteligencia artificial como motor de innovación: optimizo procesos, automatizo tareas y exploro herramientas como N8N y Claude AI. Cuando no estoy frente a una pantalla, me encuentras bajo el agua o detrás de una cámara.",
+        "en": "Dentist by profession, technologist by passion. I live in Iquique, Chile, where the ocean and scuba diving are part of my daily life. Artificial intelligence drives me: I optimize processes, automate workflows, and explore tools like N8N and Claude AI. When I'm not behind a screen, you'll find me underwater or behind a camera."
       }
     },
     "skills": {
@@ -22,10 +22,10 @@
       "items": [
         "Master Scuba Diver",
         "Fotografía",
-        "Claude AI",
-        "Google AI",
-        "DeepSeek AI",
-        "Open Code"
+        "Claude Code",
+        "Hermes Agent",
+        "Open Code",
+        "N8N Automatizacion"
       ]
     },
     "experience": {
@@ -41,6 +41,24 @@
           "description": {
             "es": "Rescue Diver con 5 Especialidades, Deep Diver, Nitrox, Peek Performance Bouyancy, Sidemount, Dry Suit.",
             "en": "Rescue Diver with 5 Specialties, Deep Diver, Nitrox, Peak Performance Buoyancy, Sidemount, Dry Suit."
+          }
+        },
+        {
+          "title": "Vibe Coding",
+          "company": "Platzi, Udemy",
+          "period": "2022 - Presente",
+          "description": {
+            "es": "Transformando conceptos en apps funcionales mediante vibe coding y desarrollo guiado por IA.",
+            "en": "Transforming concepts into functional apps through vibe coding and AI-driven development."
+          }
+        },
+        {
+          "title": "Automatización",
+          "company": "Platzi, Udemy",
+          "period": "2025 - Presente",
+          "description": {
+            "es": "Transformando procesos en automatizaciones fluidas mediante N8N y pura intención asistida por IA.",
+            "en": "Turning complex workflows into fluid automations with N8N and AI-powered intent."
           }
         }
       ]
