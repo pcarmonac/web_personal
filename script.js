@@ -22,17 +22,20 @@ async function loadInterests() {
 
         const container = document.getElementById('interests-container');
 
-        data.interests.forEach(interest => {
+        const cards = [];
+
+        data.interests.forEach((interest, index) => {
             const el = document.createElement('div');
-            el.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer interest-item focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500';
+            el.className = 'bg-white/90 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700/40 overflow-hidden transition-all duration-500 cursor-pointer interest-item focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 interest-card-hidden';
             el.setAttribute('tabindex', '0');
+            el.style.transitionDelay = `${index * 80}ms`;
 
             const iconName = interest.icon.replace(/^fa[sb] fa-/, '');
             el.innerHTML = `
                 <div class="p-8 pt-10 text-center">
                     <span class="icon interest-icon inline-block mb-5">${renderIcon(iconName)}</span>
                     <h3 class="text-xl font-semibold mb-2" data-es="${interest.title.es}" data-en="${interest.title.en}">${interest.title.es}</h3>
-                    <p class="text-gray-600 dark:text-gray-400" data-es="${interest.description.es}" data-en="${interest.description.en}">
+                    <p class="text-gray-600 dark:text-gray-300" data-es="${interest.description.es}" data-en="${interest.description.en}">
                         ${interest.description.es}
                     </p>
                 </div>
@@ -65,7 +68,21 @@ async function loadInterests() {
             }
 
             container.appendChild(el);
+            cards.push(el);
         });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    cards.forEach(card => card.classList.add('interest-card-visible'));
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        if (container.firstElementChild) {
+            observer.observe(container.firstElementChild);
+        }
     } catch (error) {
         console.error('Error cargando intereses:', error);
     }
